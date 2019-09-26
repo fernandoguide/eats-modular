@@ -9,14 +9,13 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
-import br.com.caelum.eats.administrativo.TipoDeCozinha;
 import br.com.caelum.eats.seguranca.User;
 
 interface RestauranteRepository extends JpaRepository<Restaurante, Long> {
 
 	List<Restaurante> findAllByAprovado(boolean aprovado);
 
-	Page<Restaurante> findAllByAprovadoAndTipoDeCozinha(boolean aprovado, TipoDeCozinha tipo, Pageable limit);
+	Page<Restaurante> findAllByAprovadoAndTipoDeCozinhaId(boolean aprovado, Long tipoId, Pageable limit);
 
 	Page<Restaurante> findAllByAprovado(boolean aprovado, Pageable limit);
 

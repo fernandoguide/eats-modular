@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.caelum.eats.administrativo.FormaDePagamento;
 import br.com.caelum.eats.restaurante.RestauranteFormaDePagamento.RestauranteFormaDePagamentoId;
 import lombok.AllArgsConstructor;
 
@@ -20,12 +19,11 @@ class RestauranteFormaDePagamentoController {
 	private RestauranteFormaDePagamentoRepository restauranteFormaDePagamentoRepo;
 
 	@PostMapping("/parceiros/restaurantes/{idRestaurante}/formas-de-pagamento")
-	void adiciona(@PathVariable("idRestaurante") Long idRestaurante, @RequestBody FormaDePagamento formaDePagamento) {
-		RestauranteFormaDePagamentoId id = new RestauranteFormaDePagamentoId(idRestaurante, formaDePagamento.getId());
+	void adiciona(@PathVariable("idRestaurante") Long idRestaurante, @RequestBody Long formaDePagamentoId) {
+		RestauranteFormaDePagamentoId id = new RestauranteFormaDePagamentoId(idRestaurante, formaDePagamentoId);
 		Restaurante restaurante = new Restaurante();
 		restaurante.setId(idRestaurante);
-		RestauranteFormaDePagamento restauranteFormaDePagamento = new RestauranteFormaDePagamento(id, restaurante,
-				formaDePagamento);
+		RestauranteFormaDePagamento restauranteFormaDePagamento = new RestauranteFormaDePagamento(id, restaurante, formaDePagamentoId);
 		restauranteFormaDePagamentoRepo.save(restauranteFormaDePagamento);
 	}
 
@@ -36,7 +34,7 @@ class RestauranteFormaDePagamentoController {
 	}
 
 	@GetMapping("/restaurantes/{idRestaurante}/formas-de-pagamento")
-	List<FormaDePagamento> lista(@PathVariable("idRestaurante") Long idRestaurante) {
+	List<Long> lista(@PathVariable("idRestaurante") Long idRestaurante) {
 		Restaurante restaurante = new Restaurante();
 		restaurante.setId(idRestaurante);
 		return restauranteFormaDePagamentoRepo.findAllByRestauranteOrderByNomeAsc(restaurante);
