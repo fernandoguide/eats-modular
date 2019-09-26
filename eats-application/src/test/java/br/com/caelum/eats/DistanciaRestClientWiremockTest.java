@@ -9,7 +9,6 @@ import org.springframework.cloud.contract.stubrunner.spring.StubRunnerProperties
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.web.client.RestTemplate;
 
-import br.com.caelum.eats.administrativo.TipoDeCozinha;
 import br.com.caelum.eats.restaurante.DistanciaRestClient;
 import br.com.caelum.eats.restaurante.Restaurante;
 
@@ -28,12 +27,10 @@ public class DistanciaRestClientWiremockTest {
 
   @Test
   public void deveAdicionarUmNovoRestaurante() {
-      TipoDeCozinha tipoDeCozinha = new TipoDeCozinha(1L, "Chinesa");
-
       Restaurante restaurante = new Restaurante();
       restaurante.setId(2L);
       restaurante.setCep("71500-000");
-      restaurante.setTipoDeCozinha(tipoDeCozinha);
+      restaurante.setTipoDeCozinhaId(1L);
 
       distanciaClient.novoRestauranteAprovado(restaurante);
   }
