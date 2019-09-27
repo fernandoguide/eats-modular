@@ -9,8 +9,6 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
-import br.com.caelum.eats.seguranca.User;
-
 interface RestauranteRepository extends JpaRepository<Restaurante, Long> {
 
 	List<Restaurante> findAllByAprovado(boolean aprovado);
@@ -19,11 +17,8 @@ interface RestauranteRepository extends JpaRepository<Restaurante, Long> {
 
 	Page<Restaurante> findAllByAprovado(boolean aprovado, Pageable limit);
 
-	Restaurante findByUser(User user);
+	Restaurante findByUserId(Long userId);
 	
-	@Query("select r from Restaurante r where r.user.name = :username")
-	Restaurante findByUsername(@Param("username") String username);
-
 	@Modifying(clearAutomatically = true)
 	@Query("update Restaurante r set r.aprovado = true where r.id = :id")
 	void aprovaPorId(@Param("id") Long id);

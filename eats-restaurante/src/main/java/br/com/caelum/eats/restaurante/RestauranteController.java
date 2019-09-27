@@ -30,7 +30,7 @@ class RestauranteController {
 		return new RestauranteDto(restaurante);
 	}
 
-	@GetMapping("/parceiros/restaurantes/do-usuario/{username}")
+@GetMapping("/parceiros/restaurantes/do-usuario/{username}")
 	public RestauranteDto detalhaParceiro(@PathVariable("username") String username) {
 		Restaurante restaurante = restauranteRepo.findByUsername(username);
 		return new RestauranteDto(restaurante);
