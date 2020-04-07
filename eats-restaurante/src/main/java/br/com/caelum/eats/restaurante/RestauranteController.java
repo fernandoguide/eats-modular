@@ -57,8 +57,9 @@ class RestauranteController {
 		return restauranteSalvo;
 	}
 
+	@Transactional
 @PutMapping("/parceiros/restaurantes/{id}")
-	RestauranteDto atualiza(@RequestBody RestauranteDto restaurante) {
+  public RestauranteDto atualiza(@RequestBody RestauranteDto restaurante) {
 		Restaurante doBD = restauranteRepo.getOne(restaurante.getId());
 
 		TipoDeCozinha tipoDeCozinhaOriginal = doBD.getTipoDeCozinha();
